@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+}
+
 body {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 16px;
@@ -31,4 +35,18 @@ button {
   width: 100%;
   font-size: 14px;
   box-sizing: border-box;
+}
+
+header {
+  background-color: #eee;
+  overflow: auto;
+  padding: 10px;
+}
+
+header .appname {
+  float: left;
+}
+
+header .loggedin {
+  float: right;
 }

@@ -1,3 +1,8 @@
+<?php
+// Start the session
+session_start();
+?>
+
 <?php require_once('inc/connection.php'); ?>
 <?php
     // check for user form submission 
@@ -35,6 +40,9 @@
 
                 if(mysqli_num_rows($result_set) == 1){
                     //valid user found
+                    $user = mysqli_fetch_assoc($result_set);
+                    $_SESSION["user_id"] = $user['id'];
+                    $_SESSION['first_name'] = $user['first_name'];
                     // redirect to the user.php page
                     header('Location: users.php');
 

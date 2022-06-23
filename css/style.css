@@ -1,0 +1,34 @@
+body {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.login {
+  width: 350px;
+  margin: 100px auto;
+}
+
+p.error {
+  background-color: red;
+  color: white;
+  padding: 8px;
+}
+
+label {
+  margin: 5px;
+  display: block;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  font-size: 14px;
+  box-sizing: border-box;
+}

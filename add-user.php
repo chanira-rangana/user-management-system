@@ -1,7 +1,21 @@
 <?php session_start(); ?>
 <?php require_once('inc/connection.php'); ?>
 <?php require_once('inc/function.php'); ?>
+<?php
+    $errors = array();
 
+    if(isset($_POST['submit'])){
+        //checking required fields
+
+        $required_fields = array('first_name','last_name','email','password');
+
+        foreach($required_fields as $field){
+            if(empty(trim($_POST[$field]))){
+                $errors[] = $field .' is required';
+            }
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,27 +39,39 @@
         <h1>
             Add New User <span><a href="users.php"> < Back to user list </a></span>
         </h1>
+        <?php 
+            if(!empty($errors)){
+                echo '
+                    <div class="errmsg">
+                        <b>There Was error(s) in your form</b>';
 
+                    foreach($errors as $error){
+                        echo '<p>'.$error.'</p>';
+                    }
+
+                echo '</div>';
+            }
+        ?>
         <form action="add-user.php" method="POST" class="userform">
             <p>
                 <label for="fname">First Name:</label>
-                <input type="text" name="first_name" id="fname" required>
+                <input type="text" name="first_name" id="fname">
             </p>
             <p>
                 <label for="lname">Last Name:</label>
-                <input type="text" name="last_name" id="lname" required>
+                <input type="text" name="last_name" id="lname">
             </p>
             <p>
                 <label for="email">Email Address:</label>
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email">
             </p>
             <p>
                 <label for="password">New Password:</label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password">
             </p>
             <p>
                 <label for="confirmed_password">Confirm Password:</label>
-                <input type="password" name="confirmed_password" id="confirmed_password" required>
+                <input type="password" name="confirmed_password" id="confirmed_password">
             </p>
 
             <p>

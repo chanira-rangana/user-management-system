@@ -108,3 +108,14 @@ form.userform input {
 form.userform button {
   width: 200px;
 }
+
+.errmsg {
+  background-color: crimson;
+  color: white;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.errmsg p {
+  margin: 10px 0;
+}

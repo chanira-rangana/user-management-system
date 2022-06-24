@@ -54,6 +54,29 @@
 				$errors[] = 'Email address already exists';
 			}
 		}
+
+        if(empty($error)){
+            $first_name = mysqli_real_escape_string($connection,$_POST['first_name']);
+            $last_name = mysqli_real_escape_string($connection,$_POST['last_name']);
+            $email = mysqli_real_escape_string($connection,$_POST['email']);
+            $password = mysqli_real_escape_string($connection,$_POST['password']);
+            $hashed_password = sha1($password);
+
+            $query = "INSERT INTO user ( ";
+			$query .= "first_name, last_name, email, password,last_login, is_deleted";
+			$query .= ") VALUES (";
+			$query .= "'{$first_name}', '{$last_name}', '{$email}', '{$hashed_password}', NOW(), 0";
+			$query .= ")";
+
+            $result = mysqli_query($connection, $query);
+
+            if($result) {
+                // query successfull.. redirecting to users page
+                header('Location: users.php?user_added=true');
+            } else {
+				$errors[] = 'Failed to add the new record.';
+			}
+        }
     }
 ?>
 <!DOCTYPE html>

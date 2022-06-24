@@ -40,6 +40,20 @@
 		if (!is_email($_POST['email'])) {
 			$errors[] = 'Email address is invalid.';
 		}
+
+        // checking if email address already exists
+        // sanitization -> mysqli_real_escape_string
+		$email = mysqli_real_escape_string($connection, $_POST['email']);
+		$query = "SELECT * FROM user WHERE email = '{$email}' LIMIT 1";
+
+		$result_set = mysqli_query($connection, $query);
+
+		if ($result_set) {
+            // check there was only one email address
+			if (mysqli_num_rows($result_set) == 1) {
+				$errors[] = 'Email address already exists';
+			}
+		}
     }
 ?>
 <!DOCTYPE html>

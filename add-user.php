@@ -2,11 +2,22 @@
 <?php require_once('inc/connection.php'); ?>
 <?php require_once('inc/function.php'); ?>
 <?php
+
     $errors = array();
+    $first_name = '';
+	$last_name = '';
+	$email = '';
+	$password = '';
+
 
     if(isset($_POST['submit'])){
-        //checking required fields
 
+        $first_name = $_POST['first_name'];
+		$last_name = $_POST['last_name'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+
+        //checking required fields
         $required_fields = array('first_name','last_name','email','password');
 
         foreach($required_fields as $field){
@@ -14,6 +25,21 @@
                 $errors[] = $field .' is required';
             }
         }
+
+
+        // checking max length
+		$max_len_fields = array('first_name' => 50, 'last_name' =>100, 'email' => 100, 'password' => 40);
+
+		foreach ($max_len_fields as $field => $max_len) {
+			if (strlen(trim($_POST[$field])) > $max_len) {
+				$errors[] = $field . ' must be less than ' . $max_len . ' characters';
+			}
+		}
+
+        // checking email address
+		if (!is_email($_POST['email'])) {
+			$errors[] = 'Email address is invalid.';
+		}
     }
 ?>
 <!DOCTYPE html>
@@ -55,25 +81,20 @@
         <form action="add-user.php" method="POST" class="userform">
             <p>
                 <label for="fname">First Name:</label>
-                <input type="text" name="first_name" id="fname">
+                <input type="text" name="first_name" id="fname" <?php echo 'value="' . $first_name . '"'?> >
             </p>
             <p>
                 <label for="lname">Last Name:</label>
-                <input type="text" name="last_name" id="lname">
+                <input type="text" name="last_name" id="lname" <?php echo 'value="' . $last_name . '"'?>>
             </p>
             <p>
                 <label for="email">Email Address:</label>
-                <input type="email" name="email" id="email">
+                <input type="text" name="email" id="email" <?php echo 'value="' . $email . '"'?>>
             </p>
             <p>
                 <label for="password">New Password:</label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" <?php echo 'value="' . $password . '"'?>>
             </p>
-            <p>
-                <label for="confirmed_password">Confirm Password:</label>
-                <input type="password" name="confirmed_password" id="confirmed_password">
-            </p>
-
             <p>
                 <label for="save">&nbsp;</label>
                 <button type="submit" name="submit" id="save">Save</button>

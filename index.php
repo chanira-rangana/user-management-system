@@ -75,6 +75,10 @@ session_start();
                     if(isset($errors) && !empty($errors)){
                         echo '<p class="error">Invalid Username or Password</p>';
                     }
+
+                    if($_GET['logout']){
+                        echo '<p class="info">You have sucessfully logout from the system</p>';
+                    }
                 ?>
                 <p>
                     <label for="uname" >Username:</label>

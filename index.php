@@ -4,6 +4,7 @@ session_start();
 ?>
 
 <?php require_once('inc/connection.php'); ?>
+<?php require_once('inc/function.php'); ?>
 <?php
     // check for user form submission 
     if(isset($_POST['submit'])){
@@ -35,23 +36,31 @@ session_start();
             $result_set = mysqli_query($connection,$query);            
             
             // check if the user is valid  
-            if($result_set){
+            verify_query($result_set);
                 //query successfull
 
                 if(mysqli_num_rows($result_set) == 1){
                     //valid user found
                     $user = mysqli_fetch_assoc($result_set);
+
+                    //create session values
                     $_SESSION["user_id"] = $user['id'];
                     $_SESSION['first_name'] = $user['first_name'];
+
+                    //updating last-login field in user table   //NOW() -> current date and time
+                    $query = "UPDATE user SET last_login = NOW() WHERE id = {$_SESSION['user_id']} LIMIT 1";
+                    
+                    $result_set = mysqli_query($connection,$query);
+
+                    verify_query($result_set);
+                    
                     // redirect to the user.php page
                     header('Location: users.php');
 
                 }else {
                     $errors[] = 'Invalid Username or Password';
                 }
-            }else {
-                $errors[] = 'Database query failed';
-            }
+            
         }
         
     }

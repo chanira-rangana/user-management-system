@@ -58,3 +58,31 @@ header .appname {
 header .loggedin {
   float: right;
 }
+
+main {
+  width: 1000px;
+  margin: 60px auto;
+}
+main h1 span {
+  font-size: 20px;
+}
+
+main table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #04aa6d;
+  color: white;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}

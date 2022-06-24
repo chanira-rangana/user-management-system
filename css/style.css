@@ -86,3 +86,25 @@ td {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+form.userform {
+  margin-top: 20px;
+}
+
+form.userform input,
+label {
+  margin: 10px;
+}
+
+form.userform label {
+  width: 30%;
+  float: left;
+}
+
+form.userform input {
+  width: 60%;
+}
+
+form.userform button {
+  width: 200px;
+}

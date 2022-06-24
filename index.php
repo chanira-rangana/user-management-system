@@ -76,6 +76,8 @@ session_start();
 </head>
 <body>
     <div class="login">
+
+        <!-- action="index.php" we want to process this file php programme -->
         <form action="index.php" method="POST">
             <fieldset>
                 <legend> <h1> Log In</h1></legend>

@@ -62,6 +62,7 @@ session_start();
             <th>Delete</th>
         </tr>
         <?php   
+            // put all users into table
             echo $user_list;
         ?>
       </table>

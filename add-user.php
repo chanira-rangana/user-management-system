@@ -9,7 +9,7 @@
 	$email = '';
 	$password = '';
 
-
+    // checking submit button is pressed
     if(isset($_POST['submit'])){
 
         $first_name = $_POST['first_name'];

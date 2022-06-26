@@ -87,7 +87,7 @@ session_start();
                         echo '<p class="error">Invalid Username or Password</p>';
                     }
 
-                    if($_GET['logout']){
+                    if(isset($_GET['logout'])){
                         echo '<p class="info">You have sucessfully logout from the system</p>';
                     }
                 ?>

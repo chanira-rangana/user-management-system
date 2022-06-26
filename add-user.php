@@ -19,13 +19,14 @@
 
         //checking required fields
         $required_fields = array('first_name','last_name','email','password');
+        /* 
+            $errors = check_req_fields($required_fields);  
 
-        foreach($required_fields as $field){
-            if(empty(trim($_POST[$field]))){
-                $errors[] = $field .' is required';
-            }
-        }
-
+            check_req_fields($required_fields) -> return an array, $errors is an array 
+            when we insert array into another array it will be added as array item
+            therefore we must merge array 
+        */
+        $errors = array_merge($errors, check_req_fields($required_fields));
 
         // checking max length
 		$max_len_fields = array('first_name' => 50, 'last_name' =>100, 'email' => 100, 'password' => 40);
@@ -77,6 +78,9 @@
 				$errors[] = 'Failed to add the new record.';
 			}
         }
+
+        $_POST['password'] = '';
+
     }
 ?>
 <!DOCTYPE html>
@@ -104,15 +108,9 @@
         </h1>
         <?php 
             if(!empty($errors)){
-                echo '
-                    <div class="errmsg">
-                        <b>There Was error(s) in your form</b>';
 
-                    foreach($errors as $error){
-                        echo '<p>'.$error.'</p>';
-                    }
-
-                echo '</div>';
+                display_errors($errors);
+                
             }
         ?>
         <form action="add-user.php" method="POST" class="userform">
